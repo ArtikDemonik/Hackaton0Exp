@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
@@ -18,6 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.artikdemonik.myapplication.theme.AppTheme
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.slots.PredefinedSlots
+import ru.tinkoff.decoro.watchers.FormatWatcher
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 class RegisterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +62,7 @@ class RegisterActivity : ComponentActivity() {
                         contentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 ) {
-                    Text("Зарегистрироваться")
+                    Text("Зарегистрироваться", color = MaterialTheme.colorScheme.onPrimary)
                 }
             }
         }
@@ -67,14 +72,13 @@ class RegisterActivity : ComponentActivity() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween) {
-                Text("Уже есть акаунт?", color = MaterialTheme.colorScheme.primary)
-                ElevatedButton(onClick = { val intent = Intent(this@RegisterActivity, MainActivity::class.java) },
-                    colors = ButtonDefaults.elevatedButtonColors(
-                        containerColor = MaterialTheme.colorScheme.secondary,
-                        contentColor = MaterialTheme.colorScheme.onSecondary
-                    )) {
-                    Text("Войти")
+                Box(modifier = Modifier.clickable {
+                    val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+                    startActivity(intent)
+                }){
+                    Text("Уже есть аккаунт? Войти", color = MaterialTheme.colorScheme.primary)
                 }
+
             }
         }
     }

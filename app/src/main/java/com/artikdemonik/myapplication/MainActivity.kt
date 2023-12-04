@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -40,13 +41,16 @@ class MainActivity : ComponentActivity() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween) {
-                Text("Ещё нет аккаунта?", color = MaterialTheme.colorScheme.primary)
-                ElevatedButton(onClick = {
+                Box(modifier = Modifier.clickable {
                     val intent = Intent(this@MainActivity, RegisterActivity::class.java)
                     startActivity(intent)
-                }) {
-                    Text("Зарегистрироваться")
+                }){
+                    Text(
+                        text = "  Ещё нет аккаунта? \n Зарегестрироваться",
+                        color = MaterialTheme.colorScheme.primary,
+                    )
                 }
+
             }
         }
     }
@@ -65,6 +69,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun AuthorizeCenter(){
+        val client = NetworkClient()
         val login = remember{
             mutableStateOf("")
         }
@@ -80,10 +85,14 @@ class MainActivity : ComponentActivity() {
             InputText(value = login, placeholder = "Номер или СНИЛС")
             InputText(value = password, placeholder = "Пароль")
             ElevatedButton(
-                onClick = {},
-                modifier = Modifier.fillMaxWidth(0.4f)
+                onClick = {
+                          NetworkClient().sendRequest("qwe")
+                },
+                modifier = Modifier.fillMaxWidth(0.4f),
+                colors = ButtonDefaults.elevatedButtonColors(
+                    containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text("Войти")
+                Text("Войти", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }
