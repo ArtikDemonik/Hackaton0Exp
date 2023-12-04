@@ -1,5 +1,6 @@
 package com.artikdemonik.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,55 +27,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun Registration(){
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center)
-        {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxHeight(0.7f)
-            ){
-                val login = remember{
-                    mutableStateOf("")
-                }
-                Text(text = "Регистрация", fontSize = 30.sp, color = MaterialTheme.colorScheme.primary)
-                InputText(value = login, placeholder = "СНИЛС")
-                InputText(value = login, placeholder = "Имя")
-                InputText(value = login, placeholder = "Фамилия")
-                InputText(value = login, placeholder = "Отчество")
-                InputText(value = login, placeholder = "Номер телефона")
-                InputText(value = login, placeholder = "Пароль")
-                InputText(value = login, placeholder = "Повтор пароля")
-                ElevatedButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier.fillMaxWidth(0.6f),
-                    colors = ButtonDefaults.elevatedButtonColors(
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                ) {
-                    Text("Зарегистрироваться")
-                }
-            }
-        }
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(15.dp), contentAlignment = Alignment.BottomCenter){
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween) {
-                Text("Уже есть акаунт?", color = MaterialTheme.colorScheme.primary)
-                ElevatedButton(onClick = { /*TODO*/ },
-                    colors = ButtonDefaults.elevatedButtonColors(
-                        containerColor = MaterialTheme.colorScheme.secondary,
-                        contentColor = MaterialTheme.colorScheme.onSecondary
-                    )) {
-                    Text("Войти")
-                }
-            }
-        }
-    }
+
     @Composable
     fun Authorize(){
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center)
@@ -88,7 +41,10 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween) {
                 Text("Ещё нет аккаунта?", color = MaterialTheme.colorScheme.primary)
-                ElevatedButton(onClick = { /*TODO*/ }) {
+                ElevatedButton(onClick = {
+                    val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+                    startActivity(intent)
+                }) {
                     Text("Зарегистрироваться")
                 }
             }
@@ -124,7 +80,7 @@ class MainActivity : ComponentActivity() {
             InputText(value = login, placeholder = "Номер или СНИЛС")
             InputText(value = password, placeholder = "Пароль")
             ElevatedButton(
-                onClick = { /*TODO*/ },
+                onClick = {},
                 modifier = Modifier.fillMaxWidth(0.4f)
             ) {
                 Text("Войти")
