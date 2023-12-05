@@ -2,14 +2,23 @@ package com.artikdemonik.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
-import androidx.compose.material3.*
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -20,13 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.artikdemonik.myapplication.theme.AppTheme
-import ru.tinkoff.decoro.MaskImpl
-import ru.tinkoff.decoro.slots.PredefinedSlots
-import ru.tinkoff.decoro.watchers.FormatWatcher
-import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import java.util.Timer
-import java.util.TimerTask
-import kotlin.concurrent.timer
 import kotlin.concurrent.timerTask
 
 class RegisterActivity : ComponentActivity() {
@@ -87,13 +90,9 @@ class RegisterActivity : ComponentActivity() {
                             phone = phone.value,
                             password = password.value
                         )
-                        Timer().schedule(timerTask{
-                            if(viewModel.success.value!!){
-                                val intent = Intent(this@RegisterActivity, MainWindowActivity::class.java)
-                                startActivity(intent)
-                            }
-                        }, 3000
-                        )
+                        // TODO
+                        val intent = Intent(this@RegisterActivity, MainWindowActivity::class.java)
+                        startActivity(intent)
                     },
                     modifier = Modifier.fillMaxWidth(0.6f),
                     colors = ButtonDefaults.elevatedButtonColors(
@@ -129,7 +128,7 @@ class RegisterActivity : ComponentActivity() {
             value = value.value,
             onValueChange = { value.value = it},
             colors = TextFieldDefaults.textFieldColors(containerColor = Color.Transparent),
-            placeholder = {Text(placeholder)},
+            placeholder = {Text(placeholder, color = MaterialTheme.colorScheme.secondary)},
             singleLine = true)
     }
 }

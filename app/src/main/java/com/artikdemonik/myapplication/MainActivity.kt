@@ -82,10 +82,12 @@ class MainActivity : ComponentActivity() {
             modifier = Modifier.fillMaxHeight(0.35f)
         ) {
             Text(text = "Авторизация", fontSize = 30.sp, color = MaterialTheme.colorScheme.primary)
-            InputText(value = login, placeholder = "Номер или СНИЛС")
+            InputText(value = login, placeholder = "СНИЛС")
             InputText(value = password, placeholder = "Пароль")
             ElevatedButton(
                 onClick = {
+                  val intent = Intent(this@MainActivity, MainWindowActivity::class.java)
+                  startActivity(intent)
                 },
                 modifier = Modifier.fillMaxWidth(0.4f),
                 colors = ButtonDefaults.elevatedButtonColors(
