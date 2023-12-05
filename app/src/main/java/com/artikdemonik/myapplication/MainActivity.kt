@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun AuthorizeCenter(){
-        val client = NetworkClient()
+        val viewModel = LoginVM(NetworkRepository(NetworkClient()))
         val login = remember{
             mutableStateOf("")
         }
@@ -86,7 +86,6 @@ class MainActivity : ComponentActivity() {
             InputText(value = password, placeholder = "Пароль")
             ElevatedButton(
                 onClick = {
-                          NetworkClient().sendRequest("qwe")
                 },
                 modifier = Modifier.fillMaxWidth(0.4f),
                 colors = ButtonDefaults.elevatedButtonColors(
